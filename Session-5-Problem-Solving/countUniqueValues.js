@@ -1,7 +1,7 @@
 /**
  * Implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. There can be negative numbers in the array, but it will always be sorted.
  * @param {Array} arr
- * @returns {number} count unique value
+ * @returns {number} count unique values
  */
 
 function countUniqueValues(arr) {

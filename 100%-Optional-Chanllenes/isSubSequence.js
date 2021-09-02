@@ -1,45 +1,33 @@
 /**
- * Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in.  You can solve this using the frequency counter pattern OR the multiple pointers pattern.
- * @param {}
- * @return {boolean}
+ * Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
+ * @param {string} str1
+ * @param {string} str2
+ * @returns {boolean}
  * @example
- * - areThereDuplicates(1, 2, 3) // false
- * - areThereDuplicates(1, 2, 2) // true
- * - areThereDuplicates('a', 'b', 'c', 'a') // true
+ * - isSubSequence('hello', 'hello world') //true
  */
 
-// using frequency counter pattern
-function areThereDuplicates() {
-  let collection = {};
-  for (let val in arguments) {
-    collection[arguments[val]] = (collection[arguments[val]] || 0) + 1;
-  }
-  for (let key in collection) {
-    if (collection[key] > 1) return true;
-  }
-  return false;
-}
-
-console.log(areThereDuplicates(1, 2, 3));
-console.log(areThereDuplicates(1, 2, 2));
-console.log(areThereDuplicates(1, 2, 1));
-
-// using multiple pointers pattern
-function areThereDuplicates(...args) {
-  // Two pointers
-  args.sort((a, b) => a > b);
-  let start = 0;
-  let next = 1;
-  while (next < args.length) {
-    if (args[start] === args[next]) {
-      return true;
-    }
-    start++;
-    next++;
+function isSubSequence(str1, str2) {
+  let i = 0;
+  let j = 0;
+  if (!str1) return true;
+  while (j < str2.length) {
+    if (str2[j] === str1[i]) i++;
+    if (i === str1.length) return true;
+    j++;
   }
   return false;
 }
 
-console.log(areThereDuplicates(1, 2, 3));
-console.log(areThereDuplicates(1, 2, 2));
-console.log(areThereDuplicates(1, 2, 1));
+// using Recursive
+function isSubSequence2(str1, str2) {
+  if (str1.length === 0) return true;
+  if (str2.length === 0) return false;
+  if (str2[0] === str1[0]) return isSubSequence(str1.slice(1), str2.slice(1));
+  return isSubSequence(str1, str2.slice(1));
+}
+
+console.log(isSubSequence("ngo", "ngo thanh tuan"));
+console.log(isSubSequence("test", "case"));
+
+console.log(isSubSequence2("test", "case"));
